@@ -1,0 +1,47 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Digite o caminho da pasta: ");
+        string caminho = Console.ReadLine();
+
+        if (Directory.Exists(caminho))
+        {
+            ListarArquivos(caminho);
+        }
+        else
+        {
+            Console.WriteLine("Pasta não encontrada!");
+        }
+    }
+
+    static void ListarArquivos(string pasta)
+    {
+        try
+        {
+            // Lista os arquivos da pasta atual
+            string[] arquivos = Directory.GetFiles(pasta);
+            foreach (string arq in arquivos)
+            {
+                Console.WriteLine("Arquivo: " + arq);
+            }
+
+            // Lista as subpastas
+            string[] subpastas = Directory.GetDirectories(pasta);
+            foreach (string sub in subpastas)
+            {
+                Console.WriteLine("\nEntrando na pasta: " + sub);
+                
+                // Chama o mesmo método para a subpasta
+                ListarArquivos(sub);
+            }
+        }
+        catch
+        {
+            Console.WriteLine("Sem acesso à pasta: " + pasta);
+        }
+    }
+}
