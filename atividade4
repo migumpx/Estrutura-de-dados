@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Stack<string> pilha = new Stack<string>();
+        Queue<string> fila = new Queue<string>();
+
+        int opcao = -1;
+
+        while (opcao != 0)
+        {
+            Console.WriteLine("1 - Digitar ação no editor");
+            Console.WriteLine("2 - Desfazer ação");
+            Console.WriteLine("3 - Adicionar documento na fila");
+            Console.WriteLine("4 - Imprimir documento");
+            Console.WriteLine("5 - Ver ações");
+            Console.WriteLine("6 - Ver fila");
+            Console.WriteLine("0 - Sair");
+            Console.Write("Opção: ");
+            opcao = int.Parse(Console.ReadLine());
+
+            if (opcao == 1)
+            {
+                Console.Write("Ação: ");
+                string a = Console.ReadLine();
+                pilha.Push(a);
+            }
+            else if (opcao == 2)
+            {
+                if (pilha.Count > 0)
+                {
+                    string x = pilha.Pop();
+                    Console.WriteLine("Desfeito: " + x);
+                }
+                else
+                {
+                    Console.WriteLine("Nada para desfazer.");
+                }
+            }
+            else if (opcao == 3)
+            {
+                Console.Write("Documento: ");
+                string d = Console.ReadLine();
+                fila.Enqueue(d);
+            }
+            else if (opcao == 4)
+            {
+                if (fila.Count > 0)
+                {
+                    string doc = fila.Dequeue();
+                    Console.WriteLine("Imprimindo: " + doc);
+                }
+                else
+                {
+                    Console.WriteLine("Fila vazia.");
+                }
+            }
+            else if (opcao == 5)
+            {
+                Console.WriteLine("Ações na pilha:");
+                foreach (var i in pilha)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+            else if (opcao == 6)
+            {
+                Console.WriteLine("Documentos na fila:");
+                foreach (var i in fila)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
